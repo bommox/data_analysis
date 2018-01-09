@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "bluebird": "^3.5.1",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "moment": "^2.20.1",
+    "slayer": "^1.0.1"
   },
   "devDependencies": {},
   "scripts": {
