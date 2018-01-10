@@ -26,6 +26,14 @@ class Candle {
 
     /**
      * 
+     * @param {Candle} candle 
+     */
+    equals(candle) {
+        return (candle && candle.timestamp == this.timestamp && candle.open == this.open && this.close == candle.close)
+    }
+
+    /**
+     * 
      * @param {*} data 
      * @returns {Candle} newCandle
      */
@@ -65,12 +73,65 @@ class Store {
         return this._selectedCandles
     }
 
+    /**
+     * 
+     * @param {string} field 
+     * @returns {Candle}
+     */
     getMax(field='mean') {
         return _.maxBy(this._selectedCandles, field)
     }
     
+    /**
+     * 
+     * @param {string} field 
+     * @returns {Candle}
+     */
     getMin(field='mean') {
-        return _.maxBy(this._selectedCandles, field)
+        return _.minBy(this._selectedCandles, field)
+    }
+
+    /**
+     * 
+     * @param {Candle} candle 
+     * @param {number} count 
+     * @returns {Candle[]}
+     */
+    getPrevious(candle, count=1) {
+        let result = []
+        let cIdx = this.getIndex(candle)
+        if (cIdx > -1) {
+            for (let i = cIdx - count; i < cIdx; i++) {
+                if (this._selectedCandles[i] != undefined) result.push(this._selectedCandles[i])
+            }
+        }
+        return result
+    }
+    
+    /**
+     * 
+     * @param {Candle} candle 
+     * @param {number} count 
+     * @returns {Candle[]}
+     */
+    getNext(candle, count=1) {
+        let result = []
+        let cIdx = this.getIndex(candle)
+        if (cIdx > -1) {
+            for (let i = cIdx + 1; i <= cIdx + count; i++) {
+                if (this._selectedCandles[i] != undefined) result.push(this._selectedCandles[i])
+            }
+        }
+        return result
+    }
+
+    getIndex(candle) {
+        for (let i = 0; i < this._selectedCandles.length; i++) {
+            if (candle.equals(this._selectedCandles[i])) {
+                return i
+            }
+        }
+        return -1
     }
 
     async getPeaks() {
@@ -100,10 +161,13 @@ class Store {
 }
 
 
+const OP_TYPE_SELL = "SELL"
+const OP_TYPE_BUY = "BUY"
+
 class Operation {
 
-    static TYPE_SELL = "SELL"
-    static TYPE_BUY = "BUY"
+    static get TYPE_SELL() { return OP_TYPE_SELL }
+    static get TYPE_BUY() { return OP_TYPE_BUY }
 
     /**
      * 
