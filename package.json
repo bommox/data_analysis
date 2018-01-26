@@ -1,31 +1,14 @@
 {
-  "name": "data_analysis",
+  "name": "data_analysis_2",
   "version": "1.0.0",
-  "description": "ES6 Data Analyzer",
+  "description": "",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
-  "dependencies": {
-    "bluebird": "^3.5.1",
-    "lodash": "^4.17.4",
-    "moment": "^2.20.1",
-    "slayer": "^1.0.1"
-  },
-  "devDependencies": {
-    "jasmine": "^2.8.0"
-  },
   "scripts": {
-    "test": "jasmine"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bommox/data_analysis.git"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bommox/data_analysis/issues"
-  },
-  "homepage": "https://github.com/bommox/data_analysis#readme"
+  "devDependencies": {
+    "moment": "^2.20.1"
+  }
 }
